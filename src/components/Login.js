@@ -7,7 +7,7 @@ import {Bars} from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-const ENDPOINT="http://localhost:4000"
+const ENDPOINT="https://lms-bakend.onrender.com"
 
 function Login() {
     const navigate=useNavigate();

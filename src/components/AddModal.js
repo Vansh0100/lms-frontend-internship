@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://lms-bakend.onrender.com";
 
 
 function AddModal(props){

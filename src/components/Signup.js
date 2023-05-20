@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import {Bars} from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom';
 
-const ENDPOINT="http://localhost:4000"
+const ENDPOINT="https://lms-bakend.onrender.com"
 
 function Signup() {
     const navigate=useNavigate();
