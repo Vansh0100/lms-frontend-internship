@@ -6,8 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import {Bars} from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { ENDPOINT } from '../constants';
 
-const ENDPOINT="https://lms-bakend.onrender.com"
 
 function Login() {
     const navigate=useNavigate();

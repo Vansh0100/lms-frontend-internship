@@ -1,0 +1,1 @@
+export const ENDPOINT = "https://lms-backend-rrw1.onrender.com";

@@ -3,8 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-const ENDPOINT = "https://lms-bakend.onrender.com";
-
+import { ENDPOINT } from '../constants';
 
 function AddModal(props){
     const {bookTitle}=props;
@@ -22,10 +21,11 @@ function AddModal(props){
         [e.target.name]:e.target.value
       })
     }
-    const addBook=(e)=>{
+    const addBook=async (e)=>{
         e.preventDefault();
         try {
-            axios.post(`${ENDPOINT}/insertBook`,data).then((res)=>console.log(res.data)).catch((err)=>console.log(err));
+            await axios.post(`${ENDPOINT}/insertBook`,data).then((res)=>console.log(res.data)).catch((err)=>console.log(err));
+            props.onFinish()
         } catch (error) {
             console.log(error);
         }

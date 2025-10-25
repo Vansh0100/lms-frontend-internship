@@ -14,13 +14,13 @@ import Badge from "react-bootstrap/Badge";
 import { useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
 import images from "./images";
-
-const ENDPOINT = "https://lms-bakend.onrender.com";
+import { ENDPOINT } from "../constants";
 
 function MainDashboard() {
   const [isLoading,setIsLoading]=useState(false);
   const [showModal, setShowModal] = useState(false);
   const [searchedBooks, setSearchedBooks] = useState();
+  const [data, setData] = useState([]);
   const [title, setTitle] = useState("");
   const search = async (e) => {
     e.preventDefault();
@@ -32,6 +32,21 @@ function MainDashboard() {
         .then((res) => setSearchedBooks(res.data.data))
         .catch((err) => console.log(err));
         setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getAllBooks = async () => {
+    try {
+        setIsLoading(true);
+      axios
+        .get(`${ENDPOINT}/getAllBooks`)
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data.data);
+          setIsLoading(false);
+        })
+        .catch((err) => console.log(err));
     } catch (error) {
       console.log(error);
     }
@@ -49,6 +64,10 @@ function MainDashboard() {
       setSearchedBooks();
     }
   })
+
+  useEffect(()=>{
+    getAllBooks()
+  }, [])
   return (
     <div className="w-full h-screen">
       <div className="w-full">
@@ -85,7 +104,7 @@ function MainDashboard() {
               >
                 + ADD
               </Button>
-              <AddModal show={showModal} onHide={() => setShowModal(false)} />
+              <AddModal show={showModal} onHide={() => setShowModal(false)} onFinish={()=>getAllBooks()}/>
               <Form className="d-flex" onSubmit={search}>
                 <Form.Control
                   type="search"
@@ -105,7 +124,7 @@ function MainDashboard() {
       </div>
       <div className="w-full">
         {searchedBooks == null ? (
-          <DisplayBooks />
+          <DisplayBooks data={data} loading={isLoading} onFinish={()=>getAllBooks()}/>
         ) : (
           <div className="container flex justify-center gap-5 flex-wrap mt-5">
             {
